@@ -1,130 +1,139 @@
-# 2D_Metric_on_Signal_Manifold_in_Chirp_Coordinates_for_GW
+# 2D Metric on Signal Manifold in Chirp Coordinates for Gravitational Waves
 
-This repository computes the **2D metric** on the **signal manifold** in **dimensionless chirp coordinates** using the **Fisher Information Matrix (FIM)**.  
-It also verifies the **metric approximation** by comparing **exact waveform matches** with **metric-based estimates**.
-<b>
-h(t⃗, λ⃗) = A(t⃗, λ⃗)e^(-iφ(t⃗,λ⃗))
-```
+This repository computes the **2D metric on the signal manifold** in dimensionless chirp coordinates using the **Fisher Information Matrix**, and verifies the metric approximation by comparing exact and metric-based matches.
 
-where the waveform is parameterized by:
-- **Intrinsic parameters** λ⃗ᵢₙₜᵣ: masses (m₁, m₂), spins (s₁z, s₂z, ...)
-- **Extrinsic parameters** λ⃗ₑₓₜᵣ: sky position (ι₀, φ₀)
+---
 
-#### Match Between Templates
+## Waveform Model
 
-The match between two neighboring templates in parameter space is:
-```
-M(λ⃗, λ⃗+Δλ⃗) = max_Δλ⃗ₑₓₜᵣ ⟨ĥ(λ⃗), ĥ(λ⃗+Δλ⃗)⟩
-```
+The waveform is parameterized as:
+
+$$
+h(\vec{t}, \vec{\lambda}) = A(\vec{t}, \vec{\lambda}) e^{-i \phi(\vec{t}, \vec{\lambda})}
+$$
+
+where the parameters are:
+
+- **Intrinsic parameters** $\vec{\lambda}_{\rm intr}$: masses ($m_1, m_2$), spins ($s_{1z}, s_{2z}, \dots$)  
+- **Extrinsic parameters** $\vec{\lambda}_{\rm extr}$: sky position, orientation ($\iota_0, \phi_0$)
+
+---
+
+## Match Between Templates
+
+The match between two neighboring templates in parameter space is defined as:
+
+$$
+M(\vec{\lambda}, \vec{\lambda} + \Delta \vec{\lambda}) 
+= \max_{\Delta \vec{\lambda}_{\rm extr}} \langle \hat{h}(\vec{\lambda}), \hat{h}(\vec{\lambda} + \Delta \vec{\lambda}) \rangle
+$$
 
 where:
-- ĥ = h/||h|| is the normalized waveform
-- ⟨·,·⟩ denotes the inner product inversely weighted by the one-sided power spectral density Sₕ(f) (overlap)
 
-The overlap is computed as:
-```
-⟨a,b⟩ = ∫[fₗₒw to fₕᵢgₕ] [a*(f)b(f) + a(f)b*(f)] / Sₕ(f) df
-```
+- $\hat{h} = h / ||h||$ is the normalized waveform  
+- $\langle a, b \rangle = \int_{f_{\rm low}}^{f_{\rm high}} \frac{a^*(f) b(f) + a(f) b^*(f)}{S_h(f)} df$ is the PSD-weighted inner product
 
-## Mathematical Framework
+---
 
-### Approximate Match Expression
+## Approximate Match Expression
 
-The match is approximated by Taylor expanding around Δλ⃗ = 0 up to quadratic terms:
-```
-M(λ⃗, λ⃗+Δλ⃗) = M(λ⃗, λ⃗+Δλ⃗)|[Δλ⃗=0] + Δλ⃗ᵀ ∂M(λ⃗,λ⃗+Δλ⃗)/∂λ⃗|[Δλ⃗=0] + (1/2)Δλᵢ Δλⱼ ∂²M(λ⃗,λ⃗+Δλ⃗)/(∂λᵢ∂λⱼ)|[Δλ⃗=0]
-```
+Using a Taylor expansion around $\Delta \vec{\lambda} = 0$ up to quadratic terms:
 
-### Simplified Match Expression
+$$
+M(\vec{\lambda}, \vec{\lambda} + \Delta \vec{\lambda}) 
+= M|_{\Delta \vec{\lambda} = 0} 
++ \Delta \vec{\lambda}^{\rm T} \frac{\partial M}{\partial \vec{\lambda}} \bigg|_{\Delta \vec{\lambda} = 0} 
++ \frac{1}{2} \Delta \lambda_i \Delta \lambda_j \frac{\partial^2 M}{\partial \lambda_i \partial \lambda_j} \bigg|_{\Delta \vec{\lambda} = 0}
+$$
 
-Using the initial conditions:
-- M(λ⃗, λ⃗+Δλ⃗)|[Δλ⃗=0] = M(λ⃗, λ⃗) = ⟨ĥ(t⃗,λ⃗), ĥ(t⃗,λ⃗)⟩ = 1
-- ∂M(λ⃗, λ⃗+Δλ⃗)/∂λ⃗|[Δλ⃗=0] = 0
+With initial conditions:
 
-The simplified form becomes:
-```
-M(λ⃗, λ⃗+Δλ⃗) = 1 + (1/2) (∂²M)/(∂λᵢ∂λⱼ) Δλᵢ Δλⱼ
-```
+- $M|_{\Delta \vec{\lambda} = 0} = 1$  
+- $\frac{\partial M}{\partial \vec{\lambda}} \big|_{\Delta \vec{\lambda} = 0} = 0$
 
-### Final Metric Expression
-```
-M(λ⃗, λ⃗+Δλ⃗) = 1 - gᵢⱼ Δλᵢ Δλⱼ = 1 - Δs²
-```
+we get the **simplified match**:
 
-where the metric is defined as:
-```
-gᵢⱼ = -(1/2) (∂²M)/(∂λᵢ∂λⱼ)|[Δλ⃗=0]
-```
+$$
+M(\vec{\lambda}, \vec{\lambda} + \Delta \vec{\lambda}) = 1 + \frac{1}{2} \frac{\partial^2 M}{\partial \lambda_i \partial \lambda_j} \Delta \lambda_i \Delta \lambda_j
+$$
+
+---
+
+## Metric Definition
+
+The **template-space metric** is defined as:
+
+$$
+M(\vec{\lambda}, \vec{\lambda} + \Delta \vec{\lambda}) = 1 - g_{ij} \Delta \lambda_i \Delta \lambda_j = 1 - \Delta s^2
+$$
+
+with
+
+$$
+g_{ij} = -\frac{1}{2} \frac{\partial^2 M}{\partial \lambda_i \partial \lambda_j} \Big|_{\Delta \vec{\lambda} = 0}
+$$
+
+---
 
 ## Fisher Information Matrix
 
-### Computation Method
+The **Fisher matrix elements** are:
 
-The metric is computed by evaluating the Fisher information matrix over the full parameter space and projecting out the extrinsic parameters.
+$$
+\tilde{\Gamma}_{ab} = \langle \partial_a \hat{h}, \partial_b \hat{h} \rangle
+$$
 
-The Fisher matrix elements are:
-```
-Γ̃ₐᵦ = ⟨∂ₐĥ, ∂ᵦĥ⟩
-```
-
-where ∂ₐ denotes the partial derivative of the waveform with respect to parameter a.
+where $\partial_a$ denotes derivative with respect to parameter $a$.  
 
 ### Numerical Derivatives
 
-Derivatives are calculated using the finite difference method:
-```
-f'(x) ≈ [f(x+h) - f(x-h)]/(2h) + O(h²)
-```
+Finite-difference approximation is used:
 
-### Fisher Matrix Expansion
+$$
+f'(x) \approx \frac{f(x+h) - f(x-h)}{2h} + O(h^2)
+$$
 
-For normalized waveforms ĥ(t⃗,λ⃗) = h(t⃗,λ⃗)/||h||, the Fisher matrix element becomes:
-```
-Γ̃ₐᵦ = (1/||h||²)[⟨Ae^(-iφ)(-i)∂ₐφ, Ae^(-iφ)(-i)∂ᵦφ⟩
-                  + ⟨Ae^(-iφ)(-i)∂ₐφ, e^(-iφ)∂ᵦA⟩
-                  + ⟨e^(-iφ)∂ₐA, Ae^(-iφ)(-i)∂ᵦφ⟩
-                  + ⟨∂ₐA, ∂ᵦA⟩]
-```
+### Fisher Matrix for Normalized Waveforms
 
-The adjusted Fisher matrix (accounting for the 1/2 factor from Taylor expansion):
-```
-Γ̃ₐᵦ ≈ (1/(2||h||²))[⟨A∂ₐφ, A∂ᵦφ⟩ + ⟨∂ₐA, ∂ᵦA⟩]
-```
+For $\hat{h} = h / ||h||$:
+
+$$
+\tilde{\Gamma}_{ab} = \frac{1}{||h||^2} 
+\Big[ \langle A e^{-i\phi}(-i)\partial_a \phi, A e^{-i\phi}(-i)\partial_b \phi \rangle 
++ \langle \partial_a A, \partial_b A \rangle 
++ \text{cross terms} \Big]
+$$
+
+Neglecting small cross terms, the **adjusted Fisher matrix** becomes:
+
+$$
+\tilde{\Gamma}_{ab} \approx \frac{1}{2 ||h||^2} \big[ \langle A \partial_a \phi, A \partial_b \phi \rangle + \langle \partial_a A, \partial_b A \rangle \big]
+$$
+
+---
 
 ## Parameter Space
 
 ### Intrinsic Parameters
 
-The Fisher matrix is computed in the 5-dimensional parameter space:
+We work in a **5-dimensional intrinsic parameter space**:
 
-**Chirp mass** (ℳc):
-```
-χᵣ = χₛ + δχ + (76η/113)χₛ
-```
-
-**Mass ratio** (η):
-```
-η = (m₁m₂)/(m₁+m₂)²
-```
-
-**Mass asymmetry** (δ):
-```
-δ = (m₁-m₂)/(m₁+m₂)
-```
-
-**Reduced spin** (χ):
-```
-χ = (χ₁+χ₂)/2
-```
-
-where we assume χ₁ = χ₂.
+- **Chirp mass** $\mathcal{M}_c$  
+- **Mass ratio** $\eta = \frac{m_1 m_2}{(m_1 + m_2)^2}$  
+- **Mass asymmetry** $\delta = \frac{m_1 - m_2}{m_1 + m_2}$  
+- **Reduced spin** $\chi = \frac{\chi_1 + \chi_2}{2}$ (assuming $\chi_1 = \chi_2$)  
 
 ### Metric Projection
 
-The template-space metric gᵢⱼ is computed by projecting Γ̃ₐᵦ onto the subspace orthogonal to λ⃗ₑₓₜᵣ:
-```
-g = Γ₁ - Γ₂Γ₃⁻¹Γ₄
-<br>
+The **template-space metric** is obtained by projecting out extrinsic parameters:
 
-**Author:** Tarun Kumar
+$$
+g = \Gamma_1 - \Gamma_2 \Gamma_3^{-1} \Gamma_4
+$$
 
+where $\Gamma_1, \Gamma_2, \Gamma_3, \Gamma_4$ are blocks of the Fisher matrix corresponding to intrinsic/extrinsic parameters.
+
+---
+
+**Author:** Tarun Kumar  
+**Affiliation:** IIT Gandhinagar
