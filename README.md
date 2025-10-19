@@ -42,8 +42,8 @@ Using a Taylor expansion around $\Delta \vec{\lambda} = 0$ up to quadratic terms
 $$
 M(\vec{\lambda}, \vec{\lambda} + \Delta \vec{\lambda}) 
 = M|_{\Delta \vec{\lambda} = 0} 
-+ \Delta \vec{\lambda}^{\rm T} \frac{\partial M}{\partial \vec{\lambda}} \bigg|_{\Delta \vec{\lambda} = 0} 
-+ \frac{1}{2} \Delta \lambda_i \Delta \lambda_j \frac{\partial^2 M}{\partial \lambda_i \partial \lambda_j} \bigg|_{\Delta \vec{\lambda} = 0}
+{} + \Delta \vec{\lambda}^{\rm T} \frac{\partial M}{\partial \vec{\lambda}} \bigg|_{\Delta \vec{\lambda} = 0} 
+{} + \frac{1}{2} \Delta \lambda_i \Delta \lambda_j \frac{\partial^2 M}{\partial \lambda_i \partial \lambda_j} \bigg|_{\Delta \vec{\lambda} = 0}
 $$
 
 With initial conditions:
@@ -100,8 +100,8 @@ For $\hat{h} = h / ||h||$:
 $$
 \tilde{\Gamma}_{ab} = \frac{1}{||h||^2} 
 \Big[ \langle A e^{-i\phi}(-i)\partial_a \phi, A e^{-i\phi}(-i)\partial_b \phi \rangle 
-+ \langle \partial_a A, \partial_b A \rangle 
-+ \text{cross terms} \Big]
+{} + \langle \partial_a A, \partial_b A \rangle 
+{} + \text{cross terms} \Big]
 $$
 
 Neglecting small cross terms, the **adjusted Fisher matrix** becomes:
