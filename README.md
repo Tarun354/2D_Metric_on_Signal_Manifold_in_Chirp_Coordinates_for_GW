@@ -1,141 +1,137 @@
-# 2D Metric on Signal Manifold in Chirp Coordinates for Gravitational Waves
+<h1>2D Metric on Signal Manifold in Chirp Coordinates for Gravitational Waves</h1>
 
-This repository computes the **2D metric on the signal manifold** in dimensionless chirp coordinates using the **Fisher Information Matrix**, and verifies the metric approximation by comparing exact and metric-based matches.
+<p>This repository computes the <strong>2D metric on the signal manifold</strong> in dimensionless chirp coordinates using the <strong>Fisher Information Matrix</strong>, and verifies the metric approximation by comparing exact and metric-based matches.</p>
 
----
+<hr>
 
-## Waveform Model
+<h2>Waveform Model</h2>
 
-The waveform is parameterized as:
+<p>The waveform is parameterized as:</p>
 
-$$
-h(\vec{t}, \vec{\lambda}) = A(\vec{t}, \vec{\lambda}) e^{-i \phi(\vec{t}, \vec{\lambda})}
-$$
+<p style="text-align:center;">
+h(<i>t⃗</i>, λ⃗) = A(<i>t⃗</i>, λ⃗) e<sup>-i φ(<i>t⃗</i>, λ⃗)</sup>
+</p>
 
-where the parameters are:
+<p>where the parameters are:</p>
 
-- **Intrinsic parameters** $\vec{\lambda}_{\rm intr}$: masses ($m_1, m_2$), spins ($s_{1z}, s_{2z}, \ldots$)  
-- **Extrinsic parameters** $\vec{\lambda}_{\rm extr}$: sky position and orientation ($\iota_0, \phi_0$)
+<ul>
+  <li><strong>Intrinsic parameters</strong> λ⃗<sub>intr</sub>: masses (m<sub>1</sub>, m<sub>2</sub>), spins (s<sub>1z</sub>, s<sub>2z</sub>, …)</li>
+  <li><strong>Extrinsic parameters</strong> λ⃗<sub>extr</sub>: sky position and orientation (ι<sub>0</sub>, φ<sub>0</sub>)</li>
+</ul>
 
+<hr>
 
+<h2>Match Between Templates</h2>
 
----
+<p>The match between two neighboring templates in parameter space is defined as:</p>
 
-## Match Between Templates
+<p style="text-align:center;">
+M(λ⃗, λ⃗ + Δλ⃗) = max<sub>Δλ⃗<sub>extr</sub></sub> &lt;ĥ(λ⃗), ĥ(λ⃗ + Δλ⃗)&gt;
+</p>
 
-The match between two neighboring templates in parameter space is defined as:
+<p>where:</p>
+<ul>
+  <li>ĥ = h / ||h|| is the normalized waveform</li>
+  <li>&lt;a, b&gt; = ∫<sub>f<sub>low</sub></sub><sup>f<sub>high</sub></sup> [a*(f)b(f) + a(f)b*(f)] / S<sub>h</sub>(f) df is the PSD-weighted inner product</li>
+</ul>
 
-$$
-M(\vec{\lambda}, \vec{\lambda} + \Delta \vec{\lambda}) 
-= \max_{\Delta \vec{\lambda}_{\rm extr}} \langle \hat{h}(\vec{\lambda}), \hat{h}(\vec{\lambda} + \Delta \vec{\lambda}) \rangle
-$$
+<hr>
 
-where:
+<h2>Approximate Match Expression</h2>
 
-- $\hat{h} = h / ||h||$ is the normalized waveform  
-- $\langle a, b \rangle = \int_{f_{\rm low}}^{f_{\rm high}} \frac{a^*(f) b(f) + a(f) b^*(f)}{S_h(f)} df$ is the PSD-weighted inner product
+<p>Using a Taylor expansion around Δλ⃗ = 0 up to quadratic terms:</p>
 
----
+<p style="text-align:center;">
+M(λ⃗, λ⃗ + Δλ⃗) = M|<sub>Δλ⃗=0</sub> + Δλ⃗ᵀ ∂M/∂λ⃗ |<sub>Δλ⃗=0</sub> + 1/2 Δλ<sub>i</sub> Δλ<sub>j</sub> ∂²M/∂λ<sub>i</sub>∂λ<sub>j</sub> |<sub>Δλ⃗=0</sub>
+</p>
 
-## Approximate Match Expression
+<p>With initial conditions:</p>
+<ul>
+  <li>M|<sub>Δλ⃗=0</sub> = 1</li>
+  <li>∂M/∂λ⃗ |<sub>Δλ⃗=0</sub> = 0</li>
+</ul>
 
-Using a Taylor expansion around $\Delta \vec{\lambda} = 0$ up to quadratic terms:
+<p>We get the simplified match:</p>
 
-$$
-M(\vec{\lambda}, \vec{\lambda} + \Delta \vec{\lambda}) 
-= M|_{\Delta \vec{\lambda} = 0} 
-+ \Delta \vec{\lambda}^{\rm T} \frac{\partial M}{\partial \vec{\lambda}} \bigg|_{\Delta \vec{\lambda} = 0} 
-+ \frac{1}{2} \Delta \lambda_i \Delta \lambda_j \frac{\partial^2 M}{\partial \lambda_i \partial \lambda_j} \bigg|_{\Delta \vec{\lambda} = 0}
-$$
+<p style="text-align:center;">
+M(λ⃗, λ⃗ + Δλ⃗) = 1 + 1/2 ∂²M/∂λ<sub>i</sub>∂λ<sub>j</sub> Δλ<sub>i</sub> Δλ<sub>j</sub>
+</p>
 
-With initial conditions:
+<hr>
 
-- $M|_{\Delta \vec{\lambda} = 0} = 1$  
-- $\frac{\partial M}{\partial \vec{\lambda}} \big|_{\Delta \vec{\lambda} = 0} = 0$
+<h2>Metric Definition</h2>
 
-we get the **simplified match**:
+<p>The <strong>template-space metric</strong> is defined as:</p>
 
-$$
-M(\vec{\lambda}, \vec{\lambda} + \Delta \vec{\lambda}) = 1 + \frac{1}{2} \frac{\partial^2 M}{\partial \lambda_i \partial \lambda_j} \Delta \lambda_i \Delta \lambda_j
-$$
+<p style="text-align:center;">
+M(λ⃗, λ⃗ + Δλ⃗) = 1 - g<sub>ij</sub> Δλ<sub>i</sub> Δλ<sub>j</sub> = 1 - Δs²
+</p>
 
----
+<p>with</p>
 
-## Metric Definition
+<p style="text-align:center;">
+g<sub>ij</sub> = -1/2 ∂²M/∂λ<sub>i</sub>∂λ<sub>j</sub> |<sub>Δλ⃗=0</sub>
+</p>
 
-The **template-space metric** is defined as:
+<hr>
 
-$$
-M(\vec{\lambda}, \vec{\lambda} + \Delta \vec{\lambda}) = 1 - g_{ij} \Delta \lambda_i \Delta \lambda_j = 1 - \Delta s^2
-$$
+<h2>Fisher Information Matrix</h2>
 
-with
+<p>The <strong>Fisher matrix elements</strong> are:</p>
 
-$$
-g_{ij} = -\frac{1}{2} \frac{\partial^2 M}{\partial \lambda_i \partial \lambda_j} \Big|_{\Delta \vec{\lambda} = 0}
-$$
+<p style="text-align:center;">
+Γ̃<sub>ab</sub> = &lt; ∂<sub>a</sub>ĥ, ∂<sub>b</sub>ĥ &gt;
+</p>
 
----
+<p>where ∂<sub>a</sub> denotes derivative with respect to parameter a.</p>
 
-## Fisher Information Matrix
+<h3>Numerical Derivatives</h3>
 
-The **Fisher matrix elements** are:
+<p>Finite-difference approximation:</p>
 
-$$
-\tilde{\Gamma}_{ab} = \langle \partial_a \hat{h}, \partial_b \hat{h} \rangle
-$$
+<p style="text-align:center;">
+f'(x) ≈ [f(x+h) - f(x-h)] / 2h + O(h²)
+</p>
 
-where $\partial_a$ denotes derivative with respect to parameter $a$.  
+<h3>Fisher Matrix for Normalized Waveforms</h3>
 
-### Numerical Derivatives
+<p>For ĥ = h / ||h||:</p>
 
-Finite-difference approximation is used:
+<p style="text-align:center;">
+Γ̃<sub>ab</sub> = (1/||h||²) [ &lt; A e<sup>-iφ</sup>(-i)∂<sub>a</sub>φ, A e<sup>-iφ</sup>(-i)∂<sub>b</sub>φ &gt; + &lt; ∂<sub>a</sub>A, ∂<sub>b</sub>A &gt; + cross terms ]
+</p>
 
-$$
-f'(x) \approx \frac{f(x+h) - f(x-h)}{2h} + O(h^2)
-$$
+<p>Neglecting small cross terms:</p>
 
-### Fisher Matrix for Normalized Waveforms
+<p style="text-align:center;">
+Γ̃<sub>ab</sub> ≈ 1 / (2 ||h||²) [ &lt; A ∂<sub>a</sub>φ, A ∂<sub>b</sub>φ &gt; + &lt; ∂<sub>a</sub>A, ∂<sub>b</sub>A &gt; ]
+</p>
 
-For $\hat{h} = h / ||h||$:
+<hr>
 
-$$
-\tilde{\Gamma}_{ab} = \frac{1}{||h||^2} 
-\Big[ \langle A e^{-i\phi}(-i)\partial_a \phi, A e^{-i\phi}(-i)\partial_b \phi \rangle 
-+ \langle \partial_a A, \partial_b A \rangle 
-+ \text{cross terms} \Big]
-$$
+<h2>Parameter Space</h2>
 
-Neglecting small cross terms, the **adjusted Fisher matrix** becomes:
+<h3>Intrinsic Parameters</h3>
 
-$$
-\tilde{\Gamma}_{ab} \approx \frac{1}{2 ||h||^2} \big[ \langle A \partial_a \phi, A \partial_b \phi \rangle + \langle \partial_a A, \partial_b A \rangle \big]
-$$
+<p>5-dimensional intrinsic parameter space:</p>
+<ul>
+  <li><strong>Chirp mass</strong> ℳ<sub>c</sub></li>
+  <li><strong>Mass ratio</strong> η = m<sub>1</sub> m<sub>2</sub> / (m<sub>1</sub> + m<sub>2</sub>)²</li>
+  <li><strong>Mass asymmetry</strong> δ = (m<sub>1</sub> - m<sub>2</sub>) / (m<sub>1</sub> + m<sub>2</sub>)</li>
+  <li><strong>Reduced spin</strong> χ = (χ<sub>1</sub> + χ<sub>2</sub>) / 2 (assuming χ<sub>1</sub> = χ<sub>2</sub>)</li>
+</ul>
 
----
+<h3>Metric Projection</h3>
 
-## Parameter Space
+<p>The template-space metric is obtained by projecting out extrinsic parameters:</p>
 
-### Intrinsic Parameters
+<p style="text-align:center;">
+g = Γ<sub>1</sub> - Γ<sub>2</sub> Γ<sub>3</sub><sup>-1</sup> Γ<sub>4</sub>
+</p>
 
-We work in a **5-dimensional intrinsic parameter space**:
+<p>where Γ<sub>1</sub>, Γ<sub>2</sub>, Γ<sub>3</sub>, Γ<sub>4</sub> are blocks of the Fisher matrix corresponding to intrinsic/extrinsic parameters.</p>
 
-- **Chirp mass** $\mathcal{M}_c$  
-- **Mass ratio** $\eta = \frac{m_1 m_2}{(m_1 + m_2)^2}$  
-- **Mass asymmetry** $\delta = \frac{m_1 - m_2}{m_1 + m_2}$  
-- **Reduced spin** $\chi = \frac{\chi_1 + \chi_2}{2}$ (assuming $\chi_1 = \chi_2$)  
+<hr>
 
-### Metric Projection
-
-The **template-space metric** is obtained by projecting out extrinsic parameters:
-
-$$
-g = \Gamma_1 - \Gamma_2 \Gamma_3^{-1} \Gamma_4
-$$
-
-where $\Gamma_1, \Gamma_2, \Gamma_3, \Gamma_4$ are blocks of the Fisher matrix corresponding to intrinsic/extrinsic parameters.
-
----
-
-**Author:** Tarun Kumar  
-**Affiliation:** IIT Gandhinagar
+<p><strong>Author:</strong> Tarun Kumar<br>
+<strong>Affiliation:</strong> IIT Gandhinagar</p>
