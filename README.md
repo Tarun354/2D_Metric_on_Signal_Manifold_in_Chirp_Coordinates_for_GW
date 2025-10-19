@@ -1,4 +1,4 @@
-# 2D Metric on Signal Manifold in Chirp Coordinates for Gravitational Waves
+# 2D Metric on Signal Manifold in Chirp Coordinates for GWs
 
 This repository computes the **2D metric on the signal manifold** in dimensionless chirp coordinates using the **Fisher Information Matrix**, and verifies the metric approximation by comparing exact and metric-based matches.
 
