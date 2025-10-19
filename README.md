@@ -18,6 +18,7 @@ where the parameters are:
 - **Extrinsic parameters** $\vec{\lambda}_{\rm extr}$: sky position and orientation ($\iota_0, \phi_0$)
 
 
+
 ---
 
 ## Match Between Templates
