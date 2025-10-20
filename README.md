@@ -14,6 +14,11 @@ $$
 
 where the parameters are:
 
+\begin{itemize}
+    \item \textbf{Intrinsic parameters} $\vec{\lambda}_{\rm intr}$: component masses ($m_1, m_2$) and spin components ($s_{1z}, s_{2z}, \dots$)
+    \item \textbf{Extrinsic parameters} $\vec{\lambda}_{\rm extr}$: sky position, orientation ($t_0, \phi_0$)
+\end{itemize}
+
 - **Intrinsic parameters** $\vec{\lambda}_{\rm intr}$: component masses ($m_1, m_2$) and spin components ($s_{1z}, s_{2z}, \dots$) 
 - **Extrinsic parameters** $\vec{\lambda}_{\rm extr}$: sky position, orientation ($t_0, \phi_0$)
 
