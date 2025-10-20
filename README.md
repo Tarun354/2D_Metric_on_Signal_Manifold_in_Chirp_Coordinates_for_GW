@@ -31,7 +31,7 @@ $$
 where:
 
 - $\hat{h} = h / ||h||$ is the normalized waveform  
-- $\langle a, b \rangle = \int_{f_{\rm low}}^{f_{\rm high}} \frac{a^*(f) b(f) + a(f) b^*(f)}{S_h(f)}\, df$
+- ⟨a, b⟩ = ∫₍f_low₎⁽f_high⁾ [(a*(f)b(f) + a(f)b*(f)) / S_h(f)] df  
 is the PSD-weighted inner product.
 
 
